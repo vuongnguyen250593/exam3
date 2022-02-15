@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class ProductDAO {
     private final ConnectToDB connectDB = new ConnectToDB();
@@ -35,7 +34,7 @@ public class ProductDAO {
     public void insertProduct(Product product) throws SQLException {
         try {
             Connection connection = connectDB.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into product (`name`,`price`,`quantity`,`color`,`description`,`category`) value (?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into product (`name`,`price`,`quantity`,`color`,`description`,`category`) values (?,?,?,?,?,?);");
             preparedStatement.setString(1,product.getName());
             preparedStatement.setDouble(2,product.getPrice());
             preparedStatement.setInt(3, product.getQuantity());
@@ -74,7 +73,6 @@ public class ProductDAO {
             statement.setString(5, product.getDescription());
             statement.setInt(6, product.getCategory());
             statement.setInt(7, product.getId());
-
             rowUpdated = statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -87,7 +85,7 @@ public class ProductDAO {
         // Step 1: Establishing a Connection
         try (Connection connection = connectDB.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement("select id,name,price,quantity,color,description,category from users where id =?");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,name,price,quantity,color,description,category from product where id =?");) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();

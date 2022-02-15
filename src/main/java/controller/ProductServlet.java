@@ -51,10 +51,10 @@ public class ProductServlet extends HttpServlet {
             case "postInsert":
                 insertProduct(request, response);
                 break;
-            case "deleteProduct":
+            case "delete":
                 deleteProduct(request, response);
                 break;
-            case "showUpdateForm":
+            case "update":
                 showUpdateForm(request, response);
                 break;
             case "updateProduct":
@@ -79,31 +79,29 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void insertProduct(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
         String name = request.getParameter("name");
         double price = Double.parseDouble(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String color = request.getParameter("color");
         String description = request.getParameter("description");
         int category = Integer.parseInt(request.getParameter("category"));
-        Product newProduct = new Product(id, name, price,quantity, color, description, category);
+        Product newProduct = new Product(name, price,quantity, color, description, category);
         productDAO.insertProduct(newProduct);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/ProductServlet");
-        dispatcher.forward(request, response);
+        ArrayList<Product> listProduct = productDAO.getAllProduct();
+        request.setAttribute("listProduct",listProduct);
+        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
         productDAO.deleteProduct(id);
-
         ArrayList<Product> products = productDAO.getAllProduct();
         request.setAttribute("listProduct", products);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/ProductServlet");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
-    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         double price = Double.parseDouble(request.getParameter("price"));
@@ -111,21 +109,20 @@ public class ProductServlet extends HttpServlet {
         String color = request.getParameter("color");
         String description = request.getParameter("description");
         int category = Integer.parseInt(request.getParameter("category"));
-
         Product product = new Product(id, name, price, quantity, color, description, category);
         productDAO.updateProduct(product);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/ProductServlet");
-        dispatcher.forward(request, response);
+        ArrayList<Product> products = productDAO.getAllProduct();
+        request.setAttribute("listProduct", products);
+        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     private void showUpdateForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Product existingUser = productDAO.selectProduct(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
         request.setAttribute("product", existingUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
         dispatcher.forward(request, response);
-
     }
 }
 

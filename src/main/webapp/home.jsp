@@ -274,7 +274,7 @@ $(document).ready(function(){
 						<h2>Manage <b>Product</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="/ProductServlet?action=showCreateForm" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
 						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
 					</div>
 				</div>
@@ -307,84 +307,20 @@ $(document).ready(function(){
 								<label for="checkbox1"></label>
 							</span>
 							</td>
-							<td>${product.id}</td>
-							<td>${product.name}</td>
-							<td>${product.price}</td>
-							<td>${product.quantity}</td>
-							<td>${product.color}</td>
-							<td>${product.description}</td>
-							<td>${product.category}</td>
+							<td><c:out value="${product.id}"/></td>
+							<td><c:out value="${product.name}"/></td>
+							<td><c:out value="${product.price}"/></td>
+							<td><c:out value="${product.quantity}"/></td>
+							<td><c:out value="${product.color}"/></td>
+							<td><c:out value="${product.description}"/></td>
+							<td><c:out value="${product.category}"/></td>
 							<td>
-								<a href="/ProductServlet?action=showUpdateForm&id=${product.id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="/ProductServlet?action=deleteProduct&id=${product.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+								<a href="/ProductServlet?action=update&id=${product.id}" class="edit"><i class="material-icons" title="Edit">&#xE254;</i></a>
+								<a href="/ProductServlet?action=delete&id=${product.id}" class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a>
 							</td>
 						</tr>
 					</c:forEach>
 
-<%--					<tr>--%>
-<%--						<td>--%>
-<%--							<span class="custom-checkbox">--%>
-<%--								<input type="checkbox" id="checkbox2" name="options[]" value="1">--%>
-<%--								<label for="checkbox2"></label>--%>
-<%--							</span>--%>
-<%--						</td>--%>
-<%--						<td>Dominique Perrier</td>--%>
-<%--						<td>dominiqueperrier@mail.com</td>--%>
-<%--						<td>Obere Str. 57, Berlin, Germany</td>--%>
-<%--						<td>(313) 555-5735</td>--%>
-<%--						<td>--%>
-<%--							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--%>
-<%--							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>--%>
-<%--						</td>--%>
-<%--					</tr>--%>
-<%--					<tr>--%>
-<%--						<td>--%>
-<%--							<span class="custom-checkbox">--%>
-<%--								<input type="checkbox" id="checkbox3" name="options[]" value="1">--%>
-<%--								<label for="checkbox3"></label>--%>
-<%--							</span>--%>
-<%--						</td>--%>
-<%--						<td>Maria Anders</td>--%>
-<%--						<td>mariaanders@mail.com</td>--%>
-<%--						<td>25, rue Lauriston, Paris, France</td>--%>
-<%--						<td>(503) 555-9931</td>--%>
-<%--						<td>--%>
-<%--							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--%>
-<%--							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>--%>
-<%--						</td>--%>
-<%--					</tr>--%>
-<%--					<tr>--%>
-<%--						<td>--%>
-<%--							<span class="custom-checkbox">--%>
-<%--								<input type="checkbox" id="checkbox4" name="options[]" value="1">--%>
-<%--								<label for="checkbox4"></label>--%>
-<%--							</span>--%>
-<%--						</td>--%>
-<%--						<td>Fran Wilson</td>--%>
-<%--						<td>franwilson@mail.com</td>--%>
-<%--						<td>C/ Araquil, 67, Madrid, Spain</td>--%>
-<%--						<td>(204) 619-5731</td>--%>
-<%--						<td>--%>
-<%--							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--%>
-<%--							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>--%>
-<%--						</td>--%>
-<%--					</tr>--%>
-<%--					<tr>--%>
-<%--						<td>--%>
-<%--							<span class="custom-checkbox">--%>
-<%--								<input type="checkbox" id="checkbox5" name="options[]" value="1">--%>
-<%--								<label for="checkbox5"></label>--%>
-<%--							</span>--%>
-<%--						</td>--%>
-<%--						<td>Martin Blank</td>--%>
-<%--						<td>martinblank@mail.com</td>--%>
-<%--						<td>Via Monte Bianco 34, Turin, Italy</td>--%>
-<%--						<td>(480) 631-2097</td>--%>
-<%--						<td>--%>
-<%--							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>--%>
-<%--							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>--%>
-<%--						</td>--%>
-<%--					</tr>--%>
 				</tbody>
 			</table>
 			<div class="clearfix">
@@ -406,7 +342,7 @@ $(document).ready(function(){
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form action="ProductServlet?action=postInsert" method="post">
 				<div class="modal-header">						
 					<h4 class="modal-title">Add Employee</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -414,20 +350,28 @@ $(document).ready(function(){
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" required>
+						<input type="text" class="form-control" required name="name">
 					</div>
 					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" required>
+						<label>Price</label>
+						<input type="number" class="form-control" required name="price">
 					</div>
 					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" required></textarea>
+						<label>Quantity</label>
+						<input type="number" class="form-control" required name="quantity">
 					</div>
 					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" required>
-					</div>					
+						<label>Color</label>
+						<input type="text" class="form-control" required name="color">
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<input type="text" class="form-control" required name="description">
+					</div>
+					<div class="form-group">
+						<label>Category</label>
+						<input type="number" class="form-control" required name="category">
+					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
